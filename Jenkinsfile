@@ -1,7 +1,3 @@
-# Jenkins runs pipelines on the host system that it is setup on. To run it on windows
-# install the server on a windows machine by following https://www.jenkins.io/doc/book/installing/windows/
-# once it has been setup add the below step to your pipeline file to run automated tests using Postman CLI.
-
 pipeline {
   agent any
 
