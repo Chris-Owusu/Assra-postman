@@ -1,0 +1,1807 @@
+{
+	"info": {
+		"_postman_id": "59e6f28f-4369-41b7-bea3-05a5a1345b7f",
+		"name": "ASSR API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27602722",
+		"_collection_link": "https://galactic-firefly-246811.postman.co/workspace/212ffceb-0902-4e0d-a2eb-43329079fdd0/collection/25044502-59e6f28f-4369-41b7-bea3-05a5a1345b7f?action=share&creator=27602722&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"refreshToken\", pm.response.json().tokens.refresh.token);\r",
+									"pm.collectionVariables.set(\"accessToken\", pm.response.json().tokens.access.token);\r",
+									"\r",
+									"\r",
+									"pm.test('Status Code', () => {\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"const pass=pm.collectionVariables.get('email')\r",
+									"console.log(pass)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// //Admin Login\r\n// {\r\n//     \"username\":\"{{email}}\",\r\n//     \"password\":\"{{password}}\"\r\n// }\r\n\r\n// Lecturer Email Login\r\n{\r\n    \"username\":\"LC484340\",\r\n    \"password\" : \"qwerty@0503\"\r\n}\r\n\r\n// Student Email Login\r\n// {\r\n//     \"username\":\"ST934974\",\r\n//     \"password\":\"password12@@\"\r\n// }\r\n\r\n\r\n\r\n// {\r\n//     \"username\" : \"lecturer@amalitech.org\",\r\n//     \"password\" : \"Lecturer123\"\r\n// }\r\n\r\n\r\n// stuent@student.org\r\n// Student123\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/auth/login",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"refreshToken\", pm.response.json().tokens.refresh.token);\r",
+									"pm.collectionVariables.set(\"accessToken\", pm.response.json().tokens.access.token);\r",
+									"\r",
+									"\r",
+									"pm.test('Status Code', () => {\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"const pass=pm.collectionVariables.get('email')\r",
+									"console.log(pass)\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "//Admin Login\r\n// {\r\n//     \"username\":\"alt.nl-0pjiyop@yopmail.com\",\r\n//     \"password\":\"nJ4@SH?&\"\r\n// }\r\n\r\n//Lecturer Email Login\r\n{\r\n    \"username\":\"christopher.owusu@amalitech.com\",\r\n    \"password\" : \"qwerty@0503\" \r\n}\r\n\r\n//Student Email Login\r\n// {\r\n//     \"email\":\"kevin.rukundo@amalitech.org\",\r\n//     \"password\":\"password12@@\"\r\n// }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/auth/login",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"{{refreshToken}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Create students via file upload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// const variableValue = pm.variables.get(\"email\"); // Get the current date as a string\r",
+									"// const currentDate = new Date().toISOString(); // Append the current date to the variable value\r",
+									"// const newValue = variableValue + currentDate; \r",
+									"// pm.variables.set(\"dynamicEmail\", newValue);\r",
+									"\r",
+									"// pm.sendRequest({   url: '{{baseUrl}}api/student/csv', \r",
+									"//   method: 'POST',  \r",
+									"//  body: {     value: newValue   }\r",
+									"// })"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "students",
+									"type": "file",
+									"src": "/C:/Users/BertinaAyuure/Downloads/berty.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/student/csv",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new lecturer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"lecturerStaffID\", pm.response.json().staffId);\r",
+									"pm.collectionVariables.set(\"lecturerUserID\", pm.response.json().userId);\r",
+									"pm.collectionVariables.set(\"lecturerEmail\", pm.response.json().user.email);\r",
+									"pm.collectionVariables.set(\"lecturerFirstName\", pm.response.json().user.firstname);\r",
+									"pm.collectionVariables.set(\"lecturerLastName\", pm.response.json().user.lastname);\r",
+									"console.log(pm.collectionVariables.get(\"lecturerFirstName\"))\r",
+									"\r",
+									"\r",
+									"pm.test('Status Code', () => {\r",
+									"    pm.response.to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//   \"firstname\": \"{{$randomFirstName}}\",\r\n//   \"lastname\": \"{{$randomLastName}}\",\r\n//   \"email\": \"{{$randomEmail}}\"\r\n// }\r\n{\r\n  \"firstname\": \"Temp\",\r\n  \"lastname\": \"Mail\",\r\n  \"email\": \"waram40561@soremap.com\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new lecturer Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"lecturerStaffID\", pm.response.json().staffId);\r",
+									"pm.collectionVariables.set(\"lecturerUserID\", pm.response.json().userId);\r",
+									"pm.collectionVariables.set(\"lecturerEmail\", pm.response.json().user.email);\r",
+									"pm.collectionVariables.set(\"lecturerFirstName\", pm.response.json().user.firstname);\r",
+									"pm.collectionVariables.set(\"lecturerLastName\", pm.response.json().user.lastname);\r",
+									"console.log(pm.collectionVariables.get(\"lecturerFirstName\"))\r",
+									"\r",
+									"\r",
+									"pm.test('Status Code', () => {\r",
+									"    pm.response.to.have.status(201)\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstname\": \"Chris\",\r\n  \"lastname\": \"Owusu\",\r\n  \"email\": \"christopher.owusu@amalitech.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"StudentId\", pm.response.json().studentId);\r",
+									"pm.collectionVariables.set(\"studentUserId\", pm.response.json().userId);\r",
+									"pm.collectionVariables.set(\"StudentEmail\", pm.response.json().user.email);\r",
+									"pm.collectionVariables.set(\"StudentFirstName\", pm.response.json().user.firstname);\r",
+									"pm.collectionVariables.set(\"StudentLastName\", pm.response.json().user.lastname);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//     \"firstname\" : \"{{$randomFirstName}}\",\r\n//     \"lastname\" : \"{{$randomLastName}}\",\r\n//     \"email\" : \"{{$randomEmail}}\"\r\n// }\r\n{\r\n    \"firstname\" : \"Sam\",\r\n    \"lastname\" : \"jorge\",\r\n    \"email\" : \"xewibe3034@aaorsi.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/student",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Lecturer via File Upload",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "lecturers",
+									"type": "file",
+									"src": "/C:/Users/ChristopherOwusuAhen/Downloads/lecturers.csv"
+								},
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer/csv",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all lecturers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure staff ID is present\",()=>{\r",
+									"    jsonData.forEach(a => {\r",
+									"    pm.expect(a.staffId).to.be.a(\"String\")\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a lecturer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const lecturer =pm.collectionVariables.get(\"lecturerStaffID\")\r",
+									"const jsonData  = pm.response.json()\r",
+									"\r",
+									"pm.test(\"verify the right lecturer has the necessary updates\",()=>{\r",
+									"    pm.expect(jsonData.staffId).to.be.eq(lecturer)\r",
+									"})\r",
+									"pm.collectionVariables.set(\"newLecturerEmail\", pm.response.json().user.email);\r",
+									"const LecturerNewMail= pm.collectionVariables.get(\"newLecturerEmail\")\r",
+									"\r",
+									"const LecturerOldMail= pm.collectionVariables.get(\"lecturerEmail\")\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is actually changed\",()=>{\r",
+									"    pm.expect(LecturerNewMail).to.not.be.eq(LecturerOldMail)\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstname\":\"{{lecturerFirstName}}\",\r\n  \"lastname\":\"{{lecturerLastName}}\",\r\n  \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer/{{lecturerStaffID}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer",
+								"{{lecturerStaffID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a lecturer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure staff ID is present\",()=>{\r",
+									"    pm.expect(jsonData.staffId).to.be.a(\"String\")\r",
+									"    \r",
+									"})\r",
+									"const staffID=pm.collectionVariables.get(\"lecturerStaffID\")\r",
+									"pm.test(\"verify the right lecturer has been selected\",()=>{\r",
+									"    pm.expect(jsonData.staffId).to.be.eq(staffID)\r",
+									"})\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer/{{lecturerStaffID}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer",
+								"{{lecturerStaffID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a lecturer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"// const staffID = pm.response.json()\r",
+									"// const lecturerID = pm.collectionVariables.get(\"lecturerStaffID\")\r",
+									"// pm.test(\"The right lecturer has been deleted\",()=>{\r",
+									"//     pm.expect(staffID.staffId).to.be.eq(lecturerID)\r",
+									"// })\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer/50",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a lecturer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure student has been deleted\",()=>{\r",
+									"    pm.expect(jsonData.message).to.eq(\"Lecturer not found\")\r",
+									"    \r",
+									"})\r",
+									"\r",
+									"pm.collectionVariables.unset('lecturerUserID')"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer/{{lecturerStaffID}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer",
+								"{{lecturerStaffID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all students",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure student ID is present\",()=>{\r",
+									"    jsonData.forEach(a => {\r",
+									"    pm.expect(a.studentId).to.be.a(\"String\")\r",
+									"    })\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/student",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const student=pm.collectionVariables.get(\"StudentId\")\r",
+									"const jsonData  = pm.response.json()\r",
+									"pm.test(\"verify the right studnet has the necessary updates\",()=>{\r",
+									"    pm.expect(jsonData.studentId).to.be.eq(student)\r",
+									"})\r",
+									"pm.collectionVariables.set(\"newStudentEmail\", pm.response.json().user.email);\r",
+									"const studentNewMail= pm.collectionVariables.get(\"newStudentEmail\")\r",
+									"const studentOldMail= pm.collectionVariables.get(\"StudentEmail\")\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is actually changed\",()=>{\r",
+									"    pm.expect(studentNewMail).to.not.be.eq(studentOldMail)\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstname\": \"{{StudentFirstName}}\",\r\n  \"lastname\": \"{{StudentLastName}}\",\r\n  \"email\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/student/{{StudentId}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student",
+								"{{StudentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"validating response code\",()=>{\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"const jsonData = pm.response.json()\r",
+									"const studentID= pm.collectionVariables.get(\"StudentId\")\r",
+									"\r",
+									"\r",
+									"pm.test(\"validating json response to ensure student ID is present\",()=>{\r",
+									"    pm.expect(jsonData.studentId).to.be.a(\"String\")\r",
+									"    \r",
+									"})\r",
+									"\r",
+									"pm.test(\"verify the right student has been selected\",()=>{\r",
+									"    pm.expect(jsonData.studentId).to.be.eq(studentID)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/student/{{StudentId}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student",
+								"{{StudentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"// const studentID =  pm.response.json()\r",
+									"// const student = pm.collectionVariables.get(\"StudentId\")\r",
+									"// pm.test(\"The right student has been deleted\",()=>{\r",
+									"//     pm.expect(studentID.studentId).to.be.eq(student)\r",
+									"// })\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/student/{{studentUserId}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student",
+								"{{studentUserId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"validating response code\",()=>{\r",
+									"     pm.response.to.have.status(404)\r",
+									"})\r",
+									"\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure student has been deleted\",()=>{\r",
+									"    pm.expect(jsonData.message).to.eq(\"Student not found\")\r",
+									"    \r",
+									"})\r",
+									"pm.collectionVariables.unset('StudentId')\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/student/{{StudentId}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student",
+								"{{StudentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lecturer Email Invitation - BE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test('Status Code', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test('Response message', () => {\r",
+									"    pm.expect(pm.response.json().message).to.include('Account activated successfully');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/auth/activate/{{lecturerActivationToken}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"auth",
+								"activate",
+								"{{lecturerActivationToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Email Invitation - BE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test('Status Code', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test('Response message', () => {\r",
+									"    pm.expect(pm.response.json().message).to.include('Account activated successfully');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/auth/activate/{{studentActivationToken}}",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"auth",
+								"activate",
+								"{{studentActivationToken}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lecturer",
+			"item": [
+				{
+					"name": "Get a student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"validating response code\",()=>{\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"const jsonData = pm.response.json()\r",
+									"const studentID= pm.collectionVariables.get(\"StudentId\")\r",
+									"\r",
+									"\r",
+									"pm.test(\"validating json response to ensure student ID is present\",()=>{\r",
+									"    pm.expect(jsonData.studentId).to.be.a(\"String\")\r",
+									"    \r",
+									"})\r",
+									"\r",
+									"pm.test(\"verify the right student has been selected\",()=>{\r",
+									"    pm.expect(jsonData.studentId).to.be.eq(studentID)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/student/ST550119",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student",
+								"ST550119"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "joel",
+									"disabled": true
+								},
+								{
+									"key": "lastname",
+									"value": "Osei",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "arkoabigail027@gmail.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new lecturer Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"lecturerStaffID\", pm.response.json().staffId);\r",
+									"pm.collectionVariables.set(\"lecturerEmail\", pm.response.json().user.email);\r",
+									"pm.collectionVariables.set(\"lecturerFirstName\", pm.response.json().user.firstname);\r",
+									"pm.collectionVariables.set(\"lecturerLastName\", pm.response.json().user.lastname);\r",
+									"console.log(pm.collectionVariables.get(\"lecturerFirstName\"))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstname\": \"Sefakor\",\r\n  \"lastname\": \"Dodor\",\r\n  \"email\": \"sefakor.dodor@amalitech.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/lecturer",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"lecturer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Lecturer Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure account has been activated\",()=>{\r",
+									"    pm.expect(jsonData.message).to.eq('Account activated successfully')\r",
+									"    \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/auth/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJpYXQiOjE2ODY1Nzg5MDcsImV4cCI6MTY4NjU4MDEwNywidHlwZSI6IkFDQ0VTUyJ9.OLQSnofyoRqsj9KIQtTy7-UwcAJMvKe29XYEhV2xSeM",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"auth",
+								"activate",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJpYXQiOjE2ODY1Nzg5MDcsImV4cCI6MTY4NjU4MDEwNywidHlwZSI6IkFDQ0VTUyJ9.OLQSnofyoRqsj9KIQtTy7-UwcAJMvKe29XYEhV2xSeM"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lecturer Password Reset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200 displays', ()=> {\r",
+									"    pm.response.to.have('200')\r",
+									"})\r",
+									"\r",
+									"pm\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.include(\"Password reset successfully\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"newPassword\": \"qwerty@0503\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new assignment as a draft",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ass\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Igus\",\r\n    \"description\": \"This is the description for igus assignment\",\r\n    \"deadline\": \"2025-09-10\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/assignment/draft",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"assignment",
+								"draft"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Assignment",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"ACMS\",\r\n    \"description\": \"This is the description\",\r\n    \"deadline\": \"2025-01-01T00:00:00.000Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/assignment/publish/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"assignment",
+								"publish",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Assignments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/assignment",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"assignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assignments By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/assignment/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"assignment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite Student to Assignment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"studentIds\": [\r\n    12\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/assignment/invite/3",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"assignment",
+								"invite",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"item": [
+				{
+					"name": "Activate Student Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"const jsonData = pm.response.json()\r",
+									"\r",
+									"pm.test(\"validating json response to ensure account has been activated\",()=>{\r",
+									"    pm.expect(jsonData.message).to.eq('Account activated successfully')\r",
+									"    \r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/auth/activate/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJpYXQiOjE2ODY1Nzg5MDcsImV4cCI6MTY4NjU4MDEwNywidHlwZSI6IkFDQ0VTUyJ9.OLQSnofyoRqsj9KIQtTy7-UwcAJMvKe29XYEhV2xSeM",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"auth",
+								"activate",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJpYXQiOjE2ODY1Nzg5MDcsImV4cCI6MTY4NjU4MDEwNywidHlwZSI6IkFDQ0VTUyJ9.OLQSnofyoRqsj9KIQtTy7-UwcAJMvKe29XYEhV2xSeM"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new student Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"StudentId\", pm.response.json().studentId);\r",
+									"pm.collectionVariables.set(\"StudentEmail\", pm.response.json().user.email);\r",
+									"pm.collectionVariables.set(\"StudentFirstName\", pm.response.json().user.firstname);\r",
+									"pm.collectionVariables.set(\"StudentLastName\", pm.response.json().user.lastname);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\" : \"Joel\",\r\n    \"lastname\" : \"Bamfo\",\r\n    \"email\" : \"bameybamford10@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/student",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Student Password Reset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200 displays', ()=> {\r",
+									"    pm.response.to.have.status(200)\r",
+									"})\r",
+									"\r",
+									"pm\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.json().message).to.include(\"Password reset successfully\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"newPassword\": \"password12@@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all assignment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}api/assignment",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"assignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get assignment by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}api/assignment/1",
+							"host": [
+								"{{baseUrl}}api"
+							],
+							"path": [
+								"assignment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://gitinspired-rw-api.amalitech-dev.net/",
+			"type": "string"
+		},
+		{
+			"key": "refreshToken",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": "admin@amalitech.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "Admin123",
+			"type": "string"
+		},
+		{
+			"key": "lecturerStaffID",
+			"value": ""
+		},
+		{
+			"key": "lecturerEmail",
+			"value": ""
+		},
+		{
+			"key": "lecturerFirstName",
+			"value": ""
+		},
+		{
+			"key": "lecturerLastName",
+			"value": ""
+		},
+		{
+			"key": "StudentEmail",
+			"value": ""
+		},
+		{
+			"key": "StudentFirstName",
+			"value": ""
+		},
+		{
+			"key": "StudentLastName",
+			"value": ""
+		},
+		{
+			"key": "newStudentEmail",
+			"value": ""
+		},
+		{
+			"key": "lecturerActivationToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsImlhdCI6MTY4NTk1ODM2OSwiZXhwIjoxNjg1OTU5NTY5LCJ0eXBlIjoiQUNDRVNTIn0.92QWjFruAnNQMNJHhZ5hfpgy9rmxKvVJuEFDQvDSBW0",
+			"type": "string"
+		},
+		{
+			"key": "studentActivationToken",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1NywiaWF0IjoxNjg1MzYxOTE5LCJleHAiOjE2ODUzNjMxMTksInR5cGUiOiJBQ0NFU1MifQ.6pHdxKrFp6jNfZvTbGXVQTkxkQ4f8l5Riu1IDunO7BU",
+			"type": "string"
+		},
+		{
+			"key": "StudentUserId",
+			"value": ""
+		},
+		{
+			"key": "studentUserId",
+			"value": ""
+		},
+		{
+			"key": "newLecturerEmail",
+			"value": ""
+		},
+		{
+			"key": "StudentId",
+			"value": ""
+		},
+		{
+			"key": "lecturerUserID",
+			"value": ""
+		}
+	]
+}
