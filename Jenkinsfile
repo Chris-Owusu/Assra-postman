@@ -1,7 +1,7 @@
 pipeline {
   agent any
 
-  tools {nodejs "{your_nodejs_configured_tool_name}"}
+  tools {nodejs "{Chris's NodeJS}"}
 
   stages {
     stage('Install Postman CLI') {
